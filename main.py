@@ -1,9 +1,13 @@
+from ensurepip import bootstrap
 from os import abort
 from flask import Flask, make_response, redirect, request, render_template, abort
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 todos = ["Comprar Cafe", "Enviar solicitud de comrpra", "Enviar video al productor"]
+
 
 @app.errorhandler(404)
 def not_found(error):
@@ -18,7 +22,7 @@ def internal_error(error):
 @app.route("/500")
 def error500():
     abort(500)
-    
+
  
 @app.route("/")
 def index():
