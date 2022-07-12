@@ -1,12 +1,20 @@
 from flask import Flask, make_response, redirect, request, render_template, session
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
-todos = ["Comprar Cafe", "Enviar solicitud de comrpra", "Enviar video al productor"]
+todos = ["Buy coffe", "Send buy apply", "Send video to productor"]
+
+class LoginForm(FlaskForm):
+    username = StringField("User Name", validators=[DataRequired()])     #-----> Datarequired valida la data enviada por el usuario
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Send")
 
 
 @app.errorhandler(404)
@@ -29,9 +37,11 @@ def index():
 
 @app.route('/hello')
 def hello():
-    user_ip = session.get('user_ip')    
+    user_ip = session.get('user_ip')
+    login_form = LoginForm()    
     context = {
         'user_ip': user_ip,
         'todos': todos,
+        'login_form': login_form
     }
     return render_template('hello.html', **context)     
