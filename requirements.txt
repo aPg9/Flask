@@ -2,3 +2,4 @@ flask
 flask-bootstrap
 flask-Session
 flask-wtf
+flask-testing
