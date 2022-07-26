@@ -8,6 +8,7 @@ def create_app():
     bootstrap = BT(app)
 
     app.config.from_object(Config)
+    
     app.register_blueprint(auth)
 
     return app
