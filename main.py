@@ -1,14 +1,11 @@
-from flask import Flask, make_response, redirect, request, render_template, session, url_for, flash
-from flask_bootstrap import Bootstrap
+from flask import make_response, redirect, request, render_template, session, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired     
 import unittest
+from app import create_app
 
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
-
-app.config['SECRET_KEY'] = 'SUPER SECRETO'
+app = create_app()
 
 todos = ["Buy coffee", "Send buy apply", "Send video to productor"]
 
