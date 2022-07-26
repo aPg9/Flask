@@ -1,18 +1,10 @@
 from flask import make_response, redirect, request, render_template, session, url_for, flash
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired     
 import unittest
 from app import create_app
-
+from app.forms import LoginForm
 app = create_app()
 
 todos = ["Buy coffee", "Send buy apply", "Send video to productor"]
-
-class LoginForm(FlaskForm):
-    username = StringField("User Name", validators=[DataRequired()])     #-----> Datarequired valida la data enviada por el usuario
-    password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Send")
 
 
 @app.cli.command()
