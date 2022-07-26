@@ -14,6 +14,18 @@ class MainTest(TestCase):
     def test_app_in_test_mode(self):
         self.assertTrue(current_app.config['TESTING'])
 
-    def test_index_redirects(self):
-        response = self.client.get('/')
-        self.assertRedirects(response, ('/hello'))
+    def test_index_redirect(self):
+        response = self.client.get('/index')
+        self.assertEqual(response.location, '/hello')
+
+    def test_hello_get(self):
+        response = self.client.get('/hello')
+        self.assert200(response)
+
+    def test_hello_post(self):
+        fake_form = {
+            'username': 'fake',
+            'password': 'fake_password'
+        }
+        response = self.client.post('/hello', data=fake_form)
+        self.assertEqual(response.location, '/index')

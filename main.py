@@ -10,7 +10,7 @@ bootstrap = Bootstrap(app)
 
 app.config['SECRET_KEY'] = 'SUPER SECRETO'
 
-todos = ["Buy coffe", "Send buy apply", "Send video to productor"]
+todos = ["Buy coffee", "Send buy apply", "Send video to productor"]
 
 class LoginForm(FlaskForm):
     username = StringField("User Name", validators=[DataRequired()])     #-----> Datarequired valida la data enviada por el usuario
@@ -34,7 +34,7 @@ def internal_error(error):
     return render_template('500.html', error=error)
 
 
-@app.route("/")
+@app.route("/index")
 def index():
     user_ip = request.remote_addr
     response = make_response(redirect('/hello'))     
@@ -42,7 +42,8 @@ def index():
     return response
 
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/hello',
+ methods=['GET', 'POST'])
 def hello():
     user_ip = session.get('user_ip')
     login_form = LoginForm() 
