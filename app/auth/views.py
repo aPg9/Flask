@@ -6,7 +6,7 @@ from flask import render_template, url_for, session, redirect, flash
 def login():
     login_form = LoginForm()
     context = {
-        'login_form': LoginForm()
+        'login_form': login_form 
     }
 
     if login_form.validate_on_submit():
